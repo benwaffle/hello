@@ -1,32 +1,50 @@
 #!/usr/bin/env ruby
 
-# TODO: Use GtkApplication
-# TODO: Use gtk template ui file
-
 require 'gtk3'
+require 'fileutils'
 
-class HelloWindow < Gtk::Window
-  def initialize
-    super
+path = File.expand_path(File.dirname(__FILE__))
 
-    set_title "Hello, World!"
-    set_default_size 600, 300
+gresource_bin = "#{path}/hello.gresources"
+gresource_xml = "#{path}/hello.gresources.xml"
 
-    headerbar = Gtk::HeaderBar.new
-    headerbar.set_show_close_button(true)
-    headerbar.set_title("Hello, World!")
+system("glib-compile-resources",
+       "--target", gresource_bin,
+       "--sourcedir", File.dirname(gresource_xml),
+       gresource_xml)
 
-    label = Gtk::Label.new
-    label.set_markup "<span size='larger' weight='bold'>Hello, World!</span>"
-    add(label)
-    label.show
+at_exit do
+  FileUtils.rm_f([gresource_bin])
+end
 
+resource = Gio::Resource.load(gresource_bin)
+Gio::Resources.register(resource)
+
+class HelloWindowApp < Gtk::ApplicationWindow
+  type_register
+
+  class << self
+    def init
+      set_template(:resource => "/hello/hello-window.ui")
+      bind_template_child("label")
+    end
+  end
+
+  def initialize(app)
+    super(:application => app)
   end
 end
 
-win = HelloWindow.new
-win.signal_connect "destroy" do
-  Gtk.main_quit
+class HelloApp < Gtk::Application
+  def initialize
+    super("org.gtk.hello", :flags_none)
+
+    signal_connect("activate") do |application|
+      window = HelloWindowApp.new(application)
+      window.present
+    end
+  end
 end
-win.present
-Gtk.main
+
+app = HelloApp.new
+app.run([$0]+ARGV)
