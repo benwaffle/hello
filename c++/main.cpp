@@ -12,6 +12,7 @@ on_activate (Glib::RefPtr<Gtk::Application> app)
     window->property_application() = app;
     window->property_default_width() = 600;
     window->property_default_height() = 300;
+    app->add_window(*window);
   }
   /*
    * Ask the window manager/compositor to present the window to the user.
