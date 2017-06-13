@@ -25,7 +25,7 @@ void on_activate (GLib.Application app)
 int main (string[] args)
 {
 	var app = new Gtk.Application ("com.example.hello", GLib.ApplicationFlags.FLAGS_NONE);
-	app.activate.connect(on_activate);
+	app.activate.connect (on_activate);
 	int ret = app.run (args);
 
 	return ret;
