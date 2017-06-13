@@ -12,15 +12,15 @@ fn init() {
 fn main() {
     init();
 
-    let gapp = gtk::Application::new(Some("com.example.hello"),
-                                         gio::APPLICATION_FLAGS_NONE).expect("Failed to create application.");
+    let gapp = gtk::Application::new(Some("com.example.hello"), gio::APPLICATION_FLAGS_NONE)
+        .expect("Failed to create application.");
 
     gapp.connect_activate(|gapp| {
         if let Some(win) = gapp.get_active_window() {
             win.present();
         } else {
             let win = gtk::Window::new(gtk::WindowType::Toplevel);
-            win.set_default_geometry(600,300);
+            win.set_default_geometry(600, 300);
             gapp.add_window(&win);
 
             let headerbar = gtk::HeaderBar::new();
