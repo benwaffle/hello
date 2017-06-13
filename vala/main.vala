@@ -1,17 +1,11 @@
-using Gtk;
-using GLib;
-
-namespace Hello
+[GtkTemplate (ui = "/hello/hello-window.ui")]
+public class Hello.Window : Gtk.Window
 {
-	[GtkTemplate (ui = "/hello/hello-window.ui")]
-	public class Window : Gtk.Window
-	{
-    [GtkChild] Gtk.Label label;
-    [GtkChild] Gtk.HeaderBar headerbar;
-	}
+	[GtkChild] Gtk.Label label;
+	[GtkChild] Gtk.HeaderBar headerbar;
 }
 
-static void on_activate (GLib.Application app)
+void on_activate (GLib.Application app)
 {
 	var gtk_app = app as Gtk.Application;
 	var window = gtk_app.get_active_window ();
@@ -28,10 +22,10 @@ static void on_activate (GLib.Application app)
 	window.present ();
 }
 
-static int main (string[] args)
+int main (string[] args)
 {
 	var app = new Gtk.Application ("com.example.hello", GLib.ApplicationFlags.FLAGS_NONE);
-	app.activate.connect(on_activate);
+	app.activate.connect (on_activate);
 	int ret = app.run (args);
 
 	return ret;
