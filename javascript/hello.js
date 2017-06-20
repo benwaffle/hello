@@ -9,9 +9,11 @@ const HelloWindow = new Lang.Class({
     Extends: Gtk.Window,
 
     _init: function(app) {
-        this.parent({ application: app,
-                      default_width: 600,
-                      default_height: 300 });
+        this.parent({
+            application: app,
+            default_width: 600,
+            default_height: 300
+        });
 
         let headerbar = new Gtk.HeaderBar({
             'visible': true,
