@@ -36,7 +36,7 @@ let app = new Gtk.Application({
     flags: Gio.ApplicationFlags.FLAGS_NONE,
 });
 
-app.connect('activate', function(app, event) {
+app.connect('activate', function(app) {
     let win = app.get_active_window();
 
     if (!win)
