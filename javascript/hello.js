@@ -39,7 +39,7 @@ let app = new Gtk.Application({
 app.connect('activate', function(app, event) {
     let win = app.get_active_window();
 
-    if (win == null)
+    if (!win)
         win = new HelloWindow(app);
 
     win.present();
