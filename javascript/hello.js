@@ -16,24 +16,24 @@ const HelloWindow = new Lang.Class({
         });
 
         let headerbar = new Gtk.HeaderBar({
-            'visible': true,
-            'show-close-button': true,
-            'title': 'Hello, World!'
+            visible: true,
+            show_close_button: true,
+            title: 'Hello, World!'
         });
         this.set_titlebar(headerbar);
 
         let label = new Gtk.Label({
-            'visible': true,
-            'use-markup': true,
-            'label': '<span size="larger" weight="bold">Hello, World!</span>'
+            visible: true,
+            use_markup: true,
+            label: '<span size="larger" weight="bold">Hello, World!</span>'
         });
         this.add(label);
     }
 });
 
 let app = new Gtk.Application({
-    'application-id': 'com.example.Hello',
-    'flags': Gio.ApplicationFlags.FLAGS_NONE
+    application_id: 'com.example.Hello',
+    flags: Gio.ApplicationFlags.FLAGS_NONE
 });
 
 app.connect('activate', function(app, event) {
