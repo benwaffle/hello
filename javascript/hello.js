@@ -5,6 +5,7 @@ imports.gi.versions.Gtk = '3.0';
 const Gtk = imports.gi.Gtk;
 const Gio = imports.gi.Gio;
 const Lang = imports.lang;
+const System = imports.system;
 
 const HelloWindow = new Lang.Class({
     Name: 'HelloWindow',
@@ -47,4 +48,4 @@ app.connect('activate', app => {
     win.present();
 });
 
-app.run(null);
+app.run([System.programInvocationName].concat(ARGV));
