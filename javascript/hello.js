@@ -10,9 +10,9 @@ const HelloWindow = new Lang.Class({
     Name: 'HelloWindow',
     Extends: Gtk.Window,
 
-    _init(app) {
+    _init(application) {
         this.parent({
-            application: app,
+            application,
             default_width: 600,
             default_height: 300,
         });
