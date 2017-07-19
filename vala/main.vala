@@ -1,17 +1,10 @@
-using Gtk;
+[GtkTemplate (ui = "/hello/hello-window.ui")]
+public class Hello.Window : Gtk.Window {
+	[GtkChild] Gtk.Label label;
+	[GtkChild] Gtk.HeaderBar headerbar;
 
-namespace Hello {
-	[GtkTemplate (ui = "/hello/hello-window.ui")]
-	public class Window : Gtk.Window {
-		[GtkChild]
-		Label label;
-	
-		[GtkChild]
-		HeaderBar headerbar;
-		
-		public Window (Gtk.Application app) {
-			Object(application: app);
-		}
+	public Window (Gtk.Application app) {
+		Object (application: app);
 	}
 }
 
@@ -23,7 +16,5 @@ int main (string[] args) {
 		}
 		app.active_window.present ();
 	});
-	int ret = app.run (args);
-
-	return ret;
+	return app.run (args);
 }
